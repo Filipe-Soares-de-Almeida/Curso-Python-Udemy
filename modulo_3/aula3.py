@@ -1,0 +1,6 @@
+print('aspas simples')
+print("aspas duplas")
+print('"aspas duplas dentro de aspas simples"')
+print("'aspas simples dentro de aspas duplas'")
+print(" \"escape\"")
+print(r" \"escape\" mostrando o escape")
