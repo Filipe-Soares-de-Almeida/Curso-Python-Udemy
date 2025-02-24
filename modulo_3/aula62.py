@@ -3,9 +3,9 @@ a - Cálculo do primeiro dígito
 O primeiro passo é calcular o primeiro dígito verificador, 
 e para isso, separamos os primeiros 9 dígitos do CPF (111.444.777) 
 e multiplicamos cada um dos números, da direita para a esquerda por números crescentes a partir do número 2, como no exemplo abaixo:
-1	1	1	4	4	4	7	7	7
-10	9	8	7	6	5	4	3	2
-10	9	8	28	24	20	28	21	14
+ 1 1 1 4 4 4 7 7 7
+10 9 8 7 6 5 4 3 2
+10 9 8 28 24 20 28 21 14
 Multiplicamos cada digito do CPF pelo respectivo número e somamos cada um dos resultados: 
 10+9+8+28+24+20+28+21+14 = 162
 
@@ -27,9 +27,9 @@ Para  calcular o segundo dígito vamos usar o primeiro digito já calculado.
 Vamos montar a mesma tabela de multiplicação usada no cálculo do primeiro dígito. 
 Só que desta vez usaremos na segunda linha os valores 11,10,9,8,7,6,5,4,3,2 já que estamos incluindo mais um digito no cálculo(o primeiro dígito calculado):
 
-1	1	1	4	4	4	7	7	7	3
-11	10	9	8	7	6	5	4	3	2
-11	10	9	32	28	24	35	28	21	6
+1 1 1 4 4 4 7 7 7 3
+11 10 9 8 7 6 5 4 3 2
+11 10 9 32 28 24 35 28 21 6
 Novamente, efetuamos somamos o resultado da multiplicação: 
 11 + 10 + 9 + 32 + 28 + 24 + 35 + 28 + 21 + 6 = 204
 Dividimos o total do somatório por 11 e consideramos o resto da divisão.
