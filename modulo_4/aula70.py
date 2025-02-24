@@ -20,4 +20,3 @@ soma2 = soma(5, 5)
 
 print(soma1)
 print(soma2)
-
