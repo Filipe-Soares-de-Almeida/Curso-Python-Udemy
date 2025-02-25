@@ -11,7 +11,6 @@ print(x, y, *resto)
 def soma(x, y):
   return x + y
 
-
 def soma_com_args(*args):
   
   result = 0
