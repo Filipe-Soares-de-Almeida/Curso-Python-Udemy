@@ -21,12 +21,20 @@ perguntas = [
 def jogar():
   respostas_certas = 0
 
-  def verifica_resposta(resposta_correta):
-    if resposta_correta:
-      return 'Ta on fire pae! 🔥\n', 1
-    
-    return 'Ae não paezão! 😞\n', 0
+  def verifica_resposta(resposta_usuario, resposta_correta):
+    resultado = 'Ae não paezão! 😞\n', 0
 
+    try:
+      resposta_usuario = int(resposta_usuario)
+ 
+      if opcoes_lista[resposta_usuario] == resposta_correta:
+        resultado = 'Ta on fire pae! 🔥\n', 1
+      
+    except:
+      return resultado
+    
+    return resultado
+        
 
   for pergunta in perguntas:
     print('Pergunta:', pergunta['Pergunta']);
@@ -39,8 +47,7 @@ def jogar():
 
     print(opcoes_escolha)
 
-    escolha = int(input('Escolha uma opção: '))
-    resultado, contador = verifica_resposta(opcoes_lista[escolha] == pergunta['Resposta'])
+    resultado, contador = verifica_resposta(input('Escolha uma opção: '), pergunta['Resposta'])
     print(resultado)
     respostas_certas += contador
 
