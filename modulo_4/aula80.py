@@ -34,7 +34,6 @@ def retorna_duplicado(lista_geral):
     
     print(f'Na lista de indice: [{i}] a duplicação é: {duplicacao}')
 
-
 def procura_duplicado(lista):
   sequencia_unica = set(lista)
 
@@ -49,10 +48,4 @@ def procura_duplicado(lista):
     else:
       return numero
     
-    
-
-
-
-
-
 retorna_duplicado(lista_de_listas_de_inteiros)
