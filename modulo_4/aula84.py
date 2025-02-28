@@ -28,3 +28,18 @@ print(iniciais)  # Saída: ['J', 'M', 'P', 'A']
 # O que está acontecendo?
 # A list comprehension está mapeando cada elemento da lista nomes para o primeiro caractere do elemento.
 # Em outras palavras, a list comprehension está criando uma lista de inicial (primeira letra) para cada nome da lista nomes
+
+
+produtos = [
+  {'nome': 'Produto 1', 'preco': 10},
+  {'nome': 'Produto 2', 'preco': 20},
+  {'nome': 'Produto 3', 'preco': 30},	           
+]
+
+novos_produtos = [
+  {**produto, 'preco': produto['preco'] * 1.1}
+  if produto['preco'] > 20 else {**produto}
+  for produto in produtos
+]
+
+print(*novos_produtos, sep='\n')
