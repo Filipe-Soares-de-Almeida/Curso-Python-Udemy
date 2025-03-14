@@ -1,0 +1,4 @@
+ERRO: erro file - LogFileMixin
+SUCESSO: sucesso file - LogFileMixin
+ERRO: erro file - LogFileMixin
+SUCESSO: sucesso file - LogFileMixin
