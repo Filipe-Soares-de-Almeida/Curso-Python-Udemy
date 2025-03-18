@@ -14,12 +14,23 @@
 # membro = Classe(valor), Classe['chave']
 # chave = Classe.chave.name
 # valor = Classe.chave.value
-
-def mover(direcao):
-  print(f'Movendo para {direcao}')
+import enum
 
 
-mover('esquerda')
-mover('direita')
-mover('acima')
-mover('abaixo')
+class Direcoes(enum.Enum):
+  ESQUERDA = 1
+  DIREITA = 2
+  ACIMA = 3
+  ABAIXO = 4
+
+
+def mover(direcao: Direcoes):
+  if not isinstance(direcao, Direcoes):
+    raise ValueError(f'Direção inválida: {direcao}')
+  print(f'Movendo para {direcao.name}')
+
+
+mover(Direcoes.ESQUERDA)
+mover(Direcoes.DIREITA)
+mover(Direcoes.ACIMA)
+mover(Direcoes.ABAIXO)
