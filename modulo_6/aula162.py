@@ -11,11 +11,14 @@
 # Instalando o pytz
 # pip install pytz types-pytz
 from datetime import datetime
+from pytz import timezone
 
-DATA_STR_DATA = '2022/04/20 07:49:23'
-DATA_STR_DATA = '20/04/2022'
-DATA_STR_FMT = '%d/%m/%Y'
+# DATA_STR_DATA = '2022/04/20 07:49:23'
+# DATA_STR_DATA = '20/04/2022'
+# DATA_STR_FMT = '%d/%m/%Y'
 
 # data = datetime(2022, 4, 20, 7, 49, 23)
-data = datetime.strptime(DATA_STR_DATA, DATA_STR_FMT)
+# data = datetime.strptime(DATA_STR_DATA, DATA_STR_FMT)
+
+data = datetime.now(timezone('America/Sao_Paulo'))
 print(data)
