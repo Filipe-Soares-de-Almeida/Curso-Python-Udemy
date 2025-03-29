@@ -1,7 +1,6 @@
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/37f7b26c-c340-468b-bcf3-24a1465d502b" alt="imagem centralizada">
+  <img src="https://github.com/user-attachments/assets/d6516921-b453-446f-b3f2-f222ca015406" alt="Progresso">
 </div>
-
 
 - Modulo 3: Iniciando na programação com Python (Lógica de programação básica)
 - Modulo 4: Python Intermediário (Funções Dicionários, modulos, programação funcional)
