@@ -1,3 +1,8 @@
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/37f7b26c-c340-468b-bcf3-24a1465d502b" alt="imagem centralizada">
+</div>
+
+
 # Curso Udemy Python Básico ao Avançado
 
 - Modulo 3: Iniciando na programação com Python (Lógica de programação básica)
