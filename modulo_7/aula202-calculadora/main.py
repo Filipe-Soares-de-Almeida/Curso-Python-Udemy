@@ -7,7 +7,7 @@ from environment_constants import (
 )
 import sys
 
-def configureWindowsIcon(icon: QIcon):
+def configureWindowsIcon():
   if not sys.platform.startswith('win'):
     return
   
@@ -29,8 +29,9 @@ if __name__ == '__main__':
 
   window.setWindowIcon(icon)
   app.setWindowIcon(icon) 
-  configureWindowsIcon(icon)
   
+  configureWindowsIcon()
+
   # mantem a janela fixa
   window.adjustFixedSize()
 
