@@ -2,6 +2,7 @@ from PySide6.QtGui import QIcon
 from main_window import MainWindow
 from PySide6.QtWidgets import QApplication
 from display import Display
+from buttons import Button
 from info import Info
 from environment_constants import (
   WINDOW_TITLE,
@@ -29,14 +30,18 @@ if __name__ == '__main__':
   setupTheme(app)
   
   window = MainWindow()
-  display = Display()
-  display.setPlaceholderText('Digite um número')
 
   info = Info('teste')
   window.addToVLayout(info)
-  
-  window.setWindowTitle(WINDOW_TITLE)
+
+  display = Display()
+  display.setPlaceholderText('Digite um número')
   window.addToVLayout(display)
+  
+  button = Button('teste')
+  window.addToVLayout(button)
+
+  window.setWindowTitle(WINDOW_TITLE)
 
   icon = QIcon(str(WINDOW_ICON_PATH))
   window.setWindowIcon(icon)
