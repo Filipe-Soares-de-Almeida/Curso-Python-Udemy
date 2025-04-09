@@ -36,5 +36,5 @@ class ButtonsGrid(QGridLayout):
           button.setProperty("cssClass", "specialButton")
           button.setEnabled(False)
 
-        button.clicked.connect(lambda _, text=button_text: self.parent().display.setText(self.parent().display.text() + text))
+        button.clicked.connect()
         self.addWidget(button, i, j)
