@@ -2,7 +2,7 @@ from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QLabel, QPushButton,
     QVBoxLayout, QHBoxLayout
 )
-from PySide6.QtGui import QMouseEvent, QCursor,
+from PySide6.QtGui import QMouseEvent, QCursor
 from PySide6.QtCore import Qt, QRect
 
 import ctypes
@@ -13,7 +13,6 @@ class CustomTitleBar(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setFixedHeight(40)
-        self.setStyleSheet("background-color: transparent;")
 
         layout = QHBoxLayout(self)
         layout.setContentsMargins(10, 0, 10, 0)
@@ -31,15 +30,15 @@ class CustomTitleBar(QWidget):
         for btn in (self.min_btn, self.max_btn, self.close_btn):
             btn.setFixedSize(30, 30)
             btn.setStyleSheet("""
-                QPushButton {
-                    background-color: rgba(255,255,255,0.1);
-                    color: white;
-                    border: none;
-                    border-radius: 5px;
-                }
-                QPushButton:hover {
-                    background-color: rgba(255,255,255,0.3);
-                }
+              QPushButton {
+                background-color: rgba(255,255,255,0.1);
+                color: white;
+                border: none;
+                border-radius: 5px;
+              }
+              QPushButton:hover {
+                background-color: rgba(255,255,255,0.3);
+              }
             """)
             layout.addWidget(btn)
 
@@ -52,41 +51,40 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(300, 200)
         self.setGeometry(100, 100, 500, 400)
         self.is_maximized = False
+        self.setMouseTracking(True)
 
-        container = QWidget()
-        container.setObjectName("container")
-        container.setStyleSheet("""
-            QWidget#container {
-                background-color: rgba(40, 40, 40, 150);
-                border-radius: 10px;
-                border: 1px solid rgba(255, 255, 255, 0.1);
-            }
+        self.container = QWidget()
+        self.container.setObjectName("container")
+        self.container.setStyleSheet("""
+          QWidget#container {
+            background-color: rgba(40, 40, 40, 5);
+          }
         """)
 
         self.title_bar = CustomTitleBar(self)
         self.title_bar.min_btn.clicked.connect(self.showMinimized)
         self.title_bar.max_btn.clicked.connect(self.toggle_max_restore)
         self.title_bar.close_btn.clicked.connect(self.close)
+        self.title_bar.setMouseTracking(True);
 
         self.main_content = QLabel("🌫️ Conteúdo da Janela com Blur Fosco e Redimensionamento 🪞")
-        self.main_content.setStyleSheet("color: white; font-size: 18px; padding: 20px;")
+        # self.main_content.setStyleSheet("color: white; font-size: 18px; padding: 20px;")
         self.main_content.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.main_content.setMouseTracking(True)
 
-        layout = QVBoxLayout(container)
-        layout.setContentsMargins(0, 0, 0, 0)
-        layout.setSpacing(0)
-        layout.addWidget(self.title_bar)
-        layout.addWidget(self.main_content, 1)
+        self.vblayout = QVBoxLayout(self.container)
+        self.vblayout.setContentsMargins(0, 0, 0, 0)
+        self.vblayout.setSpacing(0)
+        self.vblayout.addWidget(self.title_bar)
+        self.vblayout.addWidget(self.main_content, 1)
 
-        self.setCentralWidget(container)
+        self.setCentralWidget(self.container)
 
         self._resize_margin = 10
         self._resize_direction = None
         self._resize_start = None
         self._original_geometry = QRect()
 
-        for widget in [self, self.centralWidget(), self.title_bar]:
-          widget.setMouseTracking(True)
 
         self.enable_blur_effect()
 
