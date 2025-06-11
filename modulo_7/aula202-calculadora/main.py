@@ -34,7 +34,7 @@ def mainApp():
   window = MainWindow()
 
   # Informações
-  info = Info('teste')
+  info = Info('')
   window.addWidgetToVLayout(info)
 
   # Display de expressoes/resultados
@@ -43,14 +43,8 @@ def mainApp():
   window.addWidgetToVLayout(display)
 
   # grid de botões
-  buttonsGrid = ButtonsGrid()
+  buttonsGrid = ButtonsGrid(display=display, info=info)
   window.vLayout.addLayout(buttonsGrid)
-
-  #botão
-  # buttonsGrid.addWidget(Button('1'), 0, 0)
-  # buttonsGrid.addWidget(Button('2'), 0, 1)
-  # buttonsGrid.addWidget(Button('3'), 0, 2)
-  # buttonsGrid.addWidget(Button('4'), 1, 2)
 
   window.setWindowTitle(WINDOW_TITLE)
   icon = QIcon(str(WINDOW_ICON_PATH))

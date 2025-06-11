@@ -1,23 +1,30 @@
+from typing import TYPE_CHECKING
+
 from PySide6.QtWidgets import QPushButton, QGridLayout
+from PySide6.QtCore import Slot
 from environment_constants import MEDIUM_FONT_SIZE
-from utils import isEmpty, isNumOrDot
+from utils import isEmpty, isNumOrDot, isValidNumber
+
+if TYPE_CHECKING:
+  from display import Display
+  from info import Info
 
 class Button(QPushButton):
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
-    self.configStyle();
+    self.configStyle()
+
 
   def configStyle(self):
     font = self.font()
     font.setPixelSize(MEDIUM_FONT_SIZE)  
     self.setFont(font)
     self.setMinimumSize(75, 75)
-    # self.setProperty("cssClass", "specialButton")
 
 class ButtonsGrid(QGridLayout):
-  def __init__(self, *args, **kwargs):
+  def __init__(self, display: 'Display', info: 'Info', *args, **kwargs):
     super().__init__(*args, **kwargs)
-    self._grid_mask = [
+    self._gridMask = [
       ['C', '◀', '^', '/'],
       ['7', '8', '9', '*'],
       ['4', '5', '6', '-'],
@@ -25,16 +32,115 @@ class ButtonsGrid(QGridLayout):
       ['',  '0', '.', '=']
     ]
 
+    self.display = display
+    self.info = info
+
+    self._equation = ''
+    self._equationInitialValue = 'Sua Conta'
+    self._left = None
+    self._right = None
+    self._op = None
+    self.equation = self._equationInitialValue
     self._makeGrid()
 
-  def _makeGrid(self):
-    for i, row in enumerate(self._grid_mask):
+  @property
+  def equation(self):
+    return self._equation
+
+  @equation.setter
+  def equation(self, value):
+    self._equation = value
+    self.info.setText(value) 
+
+  def _makeGrid(self): 
+    for i, row in enumerate(self._gridMask):
       for j, button_text in enumerate(row):
         button = Button(button_text)
 
         if not isNumOrDot(button_text) and not isEmpty(button_text):
           button.setProperty("cssClass", "specialButton")
-          button.setEnabled(False)
+          self._configSpecialButton(button)
 
-        button.clicked.connect()
         self.addWidget(button, i, j)
+
+        slot = self._makeSlot(self._insertButtonTextToDisplay, button)
+        self._connectButtonClicked(button, slot)
+
+  def _connectButtonClicked(self, button: 'Button', slot: 'object'):
+    button.clicked.connect(slot)
+
+  def _configSpecialButton(self, button: 'Button'):
+    text = button.text()
+
+    if text == 'C':
+      self._connectButtonClicked(button, self._clear)
+
+    if text in '+-/*':
+      self._connectButtonClicked(
+        button, 
+        self._makeSlot(self._operatorClicked, button)
+      )
+
+    if text == '=':
+      self._connectButtonClicked(button, self._eq)
+
+  def _makeSlot(self, func, *args, **kwargs):
+    @Slot(bool)
+    def realSlot(_):
+      func(*args, **kwargs)
+    return realSlot
+
+  def _insertButtonTextToDisplay(self, button: 'Button'):    
+    buttonText = button.text()
+    newDisplayValue = self.display.text() + buttonText
+
+    if not isValidNumber(newDisplayValue):
+      return
+    
+    self.display.insert(button.text())
+
+  def _clear(self):
+    self._left = None
+    self._right = None
+    self._op = None
+    self.equation = self._equationInitialValue
+
+    self.display.clear()
+
+  def _operatorClicked(self, button: 'Button'):
+    buttonText = button.text()
+    displayText = self.display.text()
+    
+    self.display.clear()
+
+    if not isValidNumber(displayText) and self._left is None:
+      return
+    
+    if self._left is None:
+      self._left = float(displayText)
+
+
+    self._op = buttonText
+    self.equation = f'{self._left} {self._op} ??'
+
+  def _eq(self):
+    displayText = self.display.text()
+
+    if not isValidNumber(displayText):
+      return
+    
+
+    self._right = float(displayText)
+    self.equation = f'{self._left} { self._op} {self._right}'
+
+    result = 0.0
+    try:
+      result = eval(self.equation)
+    except ZeroDivisionError:
+      print('ZeroDivisionError')
+
+
+    self.display.clear()
+    self.info.setText(f'{self.equation} = {result}')
+    self._left = result
+    self._right = None
