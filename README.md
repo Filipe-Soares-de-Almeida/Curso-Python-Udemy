@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/e25833e7-9720-4857-9072-86baead65db4" alt="Progresso">
+  <img src="https://github.com/user-attachments/assets/c0bb81c6-2e9a-442d-8bad-e61bd6bfc198" alt="Progresso">
 </div>
 
 - Modulo 3: Iniciando na programação com Python (Lógica de programação básica)
