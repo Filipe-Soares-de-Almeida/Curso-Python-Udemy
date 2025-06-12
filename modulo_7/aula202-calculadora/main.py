@@ -43,7 +43,7 @@ def mainApp():
   window.addWidgetToVLayout(display)
 
   # grid de botões
-  buttonsGrid = ButtonsGrid(display=display, info=info)
+  buttonsGrid = ButtonsGrid(display=display, info=info, window=window)
   window.vLayout.addLayout(buttonsGrid)
 
   window.setWindowTitle(WINDOW_TITLE)
