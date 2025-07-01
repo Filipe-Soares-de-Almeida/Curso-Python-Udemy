@@ -4,4 +4,14 @@ from django.shortcuts import render
 
 def home(request):
     print('home')
-    return render(request, 'home/index.html')
+
+    context = { 
+        'text': 'Estamos na home',
+        'title': 'Titulo da Home'
+    }
+
+    return render(
+        request, 
+        'home/index.html',
+        context
+    )
