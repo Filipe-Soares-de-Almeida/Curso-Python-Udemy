@@ -9,5 +9,5 @@
 - Modulo 7: PySide6 - Interface gráfica com Qt6 no Python - GUI para Desktop
 - Modulo 8: Base de dados com Python - SQLite (sqlite3) e MySQL (pymysql)
 - Modulo 9: Django no Python - Básico
-- Modulo 10: Django no Python - Projeto Agenda
+- Modulo 10: Django no Python - Projeto Agenda 
 
