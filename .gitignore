@@ -6,3 +6,5 @@ venv/
 **/static_files/
 **/static/
 **/media/
+
+local_settings.py
