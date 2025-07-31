@@ -14,4 +14,4 @@ class ContactAdmin(admin.ModelAdmin):
 @admin.register(models.Category)
 class CategoryAdmin(admin.ModelAdmin):
   list_display = ('name',)
-  ordering = ('-id',)
+  ordering = ('-id',) 
